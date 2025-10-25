@@ -1,8 +1,21 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f2f2f2;
+  --foreground: #11150d;
+  --grey-box: rgba(130, 130, 130, 0.1);
+  --primary: #893a34;
+  --paragraph: #353535;
+}
+
+:root.dark {
+  --background: #0a0a0a;
+  --foreground: #d3d3d3;
+  --grey-box: rgba(130, 130, 130, 0.1);
+  --primary: #893a34;
+  --paragraph: #848484;
 }
 
 @theme inline {
@@ -10,10 +23,13 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --grey-box: var(--grey-box);
+  --primary: var(--primary);
+  --color-paragraph: var(--paragraph);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light) {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
