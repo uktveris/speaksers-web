@@ -58,7 +58,7 @@ function getAssetLinks(env: "dev" | "preview" | "prod") {
 
   return [
     {
-      relation: ["delegate_permissions/common.handle_all_urls"],
+      relation: ["delegate_permission/common.handle_all_urls"],
       target: {
         namespace: "android_app",
         package_name: `com.speaksersedu.speaksers${suffix}`,
@@ -69,5 +69,5 @@ function getAssetLinks(env: "dev" | "preview" | "prod") {
 }
 
 export const config = {
-  mather: ["/.well-known/apple-app-site-association", "/apple-app-site-association", "/.well-known/assetlinks.json"],
+  matcher: ["/.well-known/apple-app-site-association", "/apple-app-site-association", "/.well-known/assetlinks.json"],
 };
