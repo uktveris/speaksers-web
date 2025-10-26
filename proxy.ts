@@ -48,7 +48,7 @@ function getAASA(env: "dev" | "preview" | "prod") {
   return {
     applinks: {
       apps: [],
-      details: [{ appID: `MJC38BUU22.com.speaksersedu.speaksers${suffix}`, paths: ["*"] }],
+      details: [{ appID: `MJC38BUU22.com.speaksersedu.speaksers${suffix}`, paths: ["/auth/*"] }],
     },
   };
 }
