@@ -36,11 +36,16 @@ export async function GET(request: NextRequest) {
     console.log("redirect location:", location);
 
     const locationUrl = new URL(location);
-    const fragment = locationUrl.hash;
+    const fragment = locationUrl.hash.substring(1);
 
     console.log("fragment:", fragment);
 
-    const fullApplink = `${appLink}${fragment}`;
+    if (fragment.includes("error=")) {
+      console.log("Error in fragment, redirecting to error page");
+      return NextResponse.redirect(new URL("/error", request.url));
+    }
+
+    const fullApplink = `${appLink}?${fragment}`;
 
     console.log("final app link:", fullApplink);
 
