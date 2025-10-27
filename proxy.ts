@@ -48,7 +48,9 @@ function getAASA(env: "dev" | "preview" | "prod") {
   return {
     applinks: {
       apps: [],
-      details: [{ appID: `MJC38BUU22.com.speaksersedu.speaksers${suffix}`, paths: ["/auth/*"] }],
+      details: [
+        { appID: `MJC38BUU22.com.speaksersedu.speaksers${suffix}`, paths: ["/auth/callback", "/auth/callback/*"] },
+      ],
     },
   };
 }
@@ -64,6 +66,7 @@ function getAssetLinks(env: "dev" | "preview" | "prod") {
         package_name: `com.speaksersedu.speaksers${suffix}`,
         sha256_cert_fingerprints: [process.env[`SHA256_FINGERPRINT_${env.toUpperCase()}`] || ""],
       },
+      include: ["/auth/callback", "auth/callback/*"],
     },
   ];
 }

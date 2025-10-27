@@ -13,9 +13,9 @@ export async function GET(request: NextRequest) {
   }
 
   const supabaseUrl = getSupabaseUrl(request);
-  const redirectTo = getAppLink(request);
+  const appLink = getAppLink(request);
 
-  const verifyUrl = `${supabaseUrl}/auth/v1/verify?token=${token}&type=${type}&redirect_to=${encodeURIComponent(redirectTo)}`;
+  const verifyUrl = `${supabaseUrl}/auth/v1/verify?token=${token}&type=${type}&redirect_to=${encodeURIComponent(appLink)}`;
 
   console.log("calling supabase verify url:", verifyUrl);
 
@@ -40,9 +40,9 @@ export async function GET(request: NextRequest) {
 
     console.log("fragment:", fragment);
 
-    const appLink = `${redirectTo}${fragment}`;
+    const fullApplink = `${appLink}${fragment}`;
 
-    console.log("final app link:", appLink);
+    console.log("final app link:", fullApplink);
 
     return NextResponse.redirect(appLink);
   } catch (error) {
