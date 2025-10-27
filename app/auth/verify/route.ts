@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
+  console.log("accessing auth route...");
+  console.log("url:", request.url);
+  console.log("url searchParams:", request.nextUrl.searchParams);
   const searchParams = request.nextUrl.searchParams;
   const token = searchParams.get("token");
   const type = searchParams.get("type");
