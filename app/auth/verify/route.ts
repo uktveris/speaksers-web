@@ -10,7 +10,11 @@ export async function GET(request: NextRequest) {
   }
 
   const supabaseUrl = getSupabaseUrl(request);
-  const verifyUrl = `${supabaseUrl}/auth/v1/verify?token=${token}&type=${type}`;
+  const redirectTo = getAppLink(request);
+
+  const verifyUrl = `${supabaseUrl}/auth/v1/verify?token=${token}&type=${type}&redirect_to=${encodeURIComponent(redirectTo)}`;
+
+  console.log("calling supabase verify url:", verifyUrl);
 
   try {
     const response = await fetch(verifyUrl, {
@@ -18,17 +22,24 @@ export async function GET(request: NextRequest) {
       redirect: "manual",
     });
 
+    console.log("supabase response status:", response.status);
+
     const location = response.headers.get("location");
     if (!location) {
       console.log("no location found");
       return NextResponse.redirect(new URL("/error", request.url));
     }
 
-    const url = new URL(location);
-    const fragment = url.hash;
+    console.log("redirect location:", location);
 
-    const link = getAppLink(request);
-    const appLink = link + fragment;
+    const locationUrl = new URL(location);
+    const fragment = locationUrl.hash;
+
+    console.log("fragment:", fragment);
+
+    const appLink = `${redirectTo}${fragment}`;
+
+    console.log("final app link:", appLink);
 
     return NextResponse.redirect(appLink);
   } catch (error) {
