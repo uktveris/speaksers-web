@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
 
     console.log("final app link:", fullApplink);
 
-    return NextResponse.redirect(appLink);
+    return NextResponse.redirect(fullApplink);
   } catch (error) {
     console.log("auth verification error:", error);
     return NextResponse.redirect(new URL("/error", request.url));
